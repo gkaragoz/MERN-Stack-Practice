@@ -20,11 +20,11 @@ export default class ExercisesList extends Component {
 
         this.deleteExercise = this.deleteExercise.bind(this)
 
-        this.setState({ exercises: [] })
+        this.state = { exercises:[] }
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/exercises/')
+        axios.get('https://mern-stack-exercise-app-gk.herokuapp.com/exercises/')
             .then(response => {
                 this.setState({ exercises: response.data })
             })
@@ -32,7 +32,7 @@ export default class ExercisesList extends Component {
     }
 
     deleteExercise(id) {
-        axios.delete('http://localhost:5000/exercises/' + id)
+        axios.delete('https://mern-stack-exercise-app-gk.herokuapp.com/exercises/' + id)
             .then(response => console.log(response.data))
 
         this.setState({
@@ -41,8 +41,6 @@ export default class ExercisesList extends Component {
     }
 
     exerciseList() {
-        console.log(this.state)
-
         return this.state.exercises.map(currentExercise => {
             return <Exercise exercise={currentExercise} deleteExercise={this.deleteExercise} key={currentExercise._id}/>
         })
